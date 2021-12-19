@@ -42,33 +42,33 @@ function App() {
           {/* Trebali bi biti private route */}
           <PrivateRoute exact path='/'>
             <AppGradebooks />
-          </PrivateRoute>
-          <PrivateRoute exact path='/gradebooks/:id'>
-            <SingleGradebook />
-          </PrivateRoute>
-          <PrivateRoute path='/gradebooks/create'>
+          <PrivateRoute exact path='/gradebooks/create'>
             <AddGradebook />
           </PrivateRoute>
-          <PrivateRoute path='/gradebooks/:id/edit'>
+          </PrivateRoute>
+          {/* <PrivateRoute exact path='/gradebooks/:id'>
+            <SingleGradebook />
+          </PrivateRoute> */}
+          <PrivateRoute exact path='/gradebooks/:id/edit'>
             <EditGradebook />
           </PrivateRoute>
-          <PrivateRoute path='/my-gradebook'>
+          <PrivateRoute exact path='/my-gradebook'>
             <MyGradebook />
           </PrivateRoute>
-          <PrivateRoute path='/gradebooks/:id/students/create'>
+          <PrivateRoute exact path='/gradebooks/:id/students/create'>
             <AddStudents />
           </PrivateRoute>reate
           <PrivateRoute exact path='/teachers'>
             <AppTeachers />
           </PrivateRoute>
-          <PrivateRoute path='/teachers/"id'>
+          <PrivateRoute exact path='/teachers/"id'>
             <SingleTeacher />
           </PrivateRoute>
           {/* A ovi guest rute */}
-          <GuestRoute path='/login'>
+          <GuestRoute exact path='/login'>
             <Login />
           </GuestRoute>
-          <GuestRoute path='/register' >
+          <GuestRoute exact path='/register' >
             <Register />
           </GuestRoute>
         </Switch>

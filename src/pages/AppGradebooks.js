@@ -8,6 +8,8 @@ export default function AppGradebooks() {
     const gradebooks = useSelector(selectGradebooks);
     const dispatch = useDispatch();
 
+    console.log('Selektovao gradebooks', gradebooks);
+
     useEffect(() => {
         dispatch(getGradebooks());
       }, []);

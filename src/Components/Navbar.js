@@ -32,6 +32,11 @@ export default function Navbar() {
                 )}
                 {isAuthenticated && (
                     <li>
+                        <Link to="/gradebooks/create">Create gradebook</Link>
+                    </li>
+                )}
+                {isAuthenticated && (
+                    <li>
                         <button type="button" onClick={handleLogout}> Logout </button>
                     </li>
                 )}

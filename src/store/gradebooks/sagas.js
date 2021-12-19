@@ -4,7 +4,8 @@ import gradebookService from "../../services/GradebookService";
 
 function* handleGetGradebooks(action) {
   try {
-    const gradebooks = yield call(gradebookService.getGradebooks, action.payload);
+    const gradebooks = yield call(gradebookService.getAll, action.payload);
+    console.log('Dobio gradebooks', gradebooks);
     yield put(setGradebooks(gradebooks));
   } catch (error) {
     console.error(error);
@@ -13,7 +14,8 @@ function* handleGetGradebooks(action) {
 
 function* handleCreateGradebook(action) {
   try {
-    const gradebook = yield call(gradebookService.createGradebook, action.payload.gradebook);
+    const gradebook = yield call(gradebookService.add(), action.payload.gradebook);
+    console.log('Dobio add');
 
     if (action.payload.onSuccess) {
       yield call(action.payload.onSuccess, gradebook);
@@ -25,7 +27,7 @@ function* handleCreateGradebook(action) {
 
 function* handleGetGradebook(action) {
   try {
-    const gradebook = yield call(gradebookService.getGradebook, action.payload);
+    const gradebook = yield call(gradebookService.get(), action.payload);
     yield put(setGradebook(gradebook));
   } catch (error) {
     console.log(error);
