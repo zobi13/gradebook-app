@@ -1,7 +1,17 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { logout, selectActiveUser, selectIsAuthenticated } from "../store/auth";
 import { Link } from "react-router-dom";
 
-export default function Navbar({isAuthenticated, handleLogout}) {
+export default function Navbar() {
+    const isAuthenticated = useSelector(selectIsAuthenticated);
+    const activeUser = useSelector(selectActiveUser);
+  
+    const dispatch = useDispatch();
+  
+    function handleLogout() {
+      dispatch(logout());
+    }
     return (
         <nav>
             <ul>

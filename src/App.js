@@ -15,7 +15,6 @@ import AddGradebook from "./pages/AddGradebook";
 import AddStudents from "./pages/AddStudents";
 import MyGradebook from "./pages/MyGradebook";
 import EditGradebook from "./pages/EditGradebook";
-import { logout } from "./store/activeUser/slice";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import AppTeachers from './pages/AppTeachers';
@@ -23,13 +22,11 @@ import SingleTeacher from './pages/SingleTeacher';
 import PrivateRoute from './Components/shared/PrivateRoute';
 import GuestRoute from './Components/shared/GuestRoute';
 import Navbar from './Components/Navbar';
-import {selectIsAuthenticated} from "./store/activeUser/selectors"
-import {getActiveUser} from "./store/activeUser/slice"
+import { getActiveUser, selectIsAuthenticated } from "./store/auth";
 
 function App() {
-  const isAuthenticated = useSelector(selectIsAuthenticated);
-  
   const dispatch = useDispatch();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -37,22 +34,15 @@ function App() {
     }
   }, []);
 
-  async function handleLogout() {
-    dispatch(logout());
-  }
-
   return (
     <div className='App' >
       <Router>
-        <Navbar
-            isAuthenticated={isAuthenticated}
-            handleLogout={handleLogout}
-          />
+        <Navbar/>
         <Switch>
           {/* Trebali bi biti private route */}
-          <Route exact path='/'>
+          <PrivateRoute exact path='/'>
             <AppGradebooks />
-          </Route>
+          </PrivateRoute>
           <PrivateRoute exact path='/gradebooks/:id'>
             <SingleGradebook />
           </PrivateRoute>

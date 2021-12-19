@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { register } from "../store/activeUser/slice";
+import { register } from "../store/auth";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -13,74 +13,76 @@ export default function Register() {
     password_confirmation: "",
   });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  function handleSubmit(event) {
+    event.preventDefault();
     dispatch(register(userData));
-  };
+  }
 
   return (
     <div>
       <h2>Register</h2>
-      <form
-        style={{ display: "flex", flexDirection: "column", width: 300 }}
-        onSubmit={handleSubmit}
-      >
+      <form onSubmit={handleSubmit}>
+        <div>
+          <input
+            required
+            placeholder="First name"
+            value={userData.first_name}
+            onChange={({ target }) =>
+              setUserData({ ...userData, first_name: target.value })
+            }
+          />
         <input
-          required
-          minLength={2}
-          value={userData.first_name}
-          placeholder="First name"
-          onChange={({ target }) =>
-            setUserData({ ...userData, first_name: target.value })
-          }
-        />
+            required
+            placeholder="Last name"
+            value={userData.last_name}
+            onChange={({ target }) =>
+              setUserData({ ...userData, last_name: target.value })
+            }
+          />
         <input
-          required
-          minLength={2}
-          value={userData.last_name}
-          placeholder="Last name"
-          onChange={({ target }) =>
-            setUserData({ ...userData, last_name: target.value })
-          }
-        />
-        <input
-          required
-          value={userData.email}
-          placeholder="Email"
-          onChange={({ target }) =>
-            setUserData({ ...userData, email: target.value })
-          }
-        />
-        <input
-          required
-          type="password"
-          minLength={6}
-          value={userData.password}
-          placeholder="Password"
-          onChange={({ target }) =>
-            setUserData({ ...userData, password: target.value })
-          }
-        />
-        <input
-          required
-          type="password"
-          minLength={6}
-          value={userData.password_confirmation}
-          placeholder="Confirm Password"
-          onChange={({ target }) =>
-            setUserData({ ...userData, password_confirmation: target.value })
-          }
-        />
-        <input
-          required
-          minLength={2}
-          value={userData.profile_pic_url}
-          placeholder="Profile picture(url)"
-          onChange={({ target }) =>
-            setUserData({ ...userData, profile_pic_url: target.value })
-          }
-        />
-        <button>Submit</button>
+            required
+            placeholder="Profile picture(url)"
+            value={userData.profile_pic_url}
+            onChange={({ target }) =>
+              setUserData({ ...userData, profile_pic_url: target.value })
+            }
+          />
+        </div>
+        <div>
+          <input
+            required
+            type="email"
+            placeholder="Email"
+            value={userData.email}
+            onChange={({ target }) =>
+              setUserData({ ...userData, email: target.value })
+            }
+          />
+        </div>
+        <div>
+          <input
+            required
+            type="password"
+            placeholder="Password"
+            value={userData.password}
+            onChange={({ target }) =>
+              setUserData({ ...userData, password: target.value })
+            }
+          />
+        </div>
+        <div>
+          <input
+            required
+            type="password"
+            placeholder="Confirm password"
+            value={userData.password_confirmation}
+            onChange={({ target }) =>
+              setUserData({ ...userData, password_confirmation: target.value })
+            }
+          />
+        </div>
+
+        <button>Register</button>
       </form>
     </div>
   );

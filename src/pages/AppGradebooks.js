@@ -5,14 +5,14 @@ import { selectGradebooks } from "../store/gradebooks/selectors";
 import { getGradebooks } from "../store/gradebooks/slice";
 
 export default function AppGradebooks() {
-  const dispatch = useDispatch();
-  const gradebooks = useSelector(selectGradebooks);
+    const gradebooks = useSelector(selectGradebooks);
+    const dispatch = useDispatch();
 
-  const history = useHistory();
+    useEffect(() => {
+        dispatch(getGradebooks());
+      }, []);
 
-  useEffect(() => {
-    dispatch(getGradebooks());
-  }, []);
+    const history = useHistory();
 
   return (
     <div style={{ marginLeft: 5 }}>
